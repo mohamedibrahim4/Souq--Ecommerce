@@ -1,0 +1,95 @@
+﻿@using MVCDotNetV1.Models
+@model IEnumerable<MVCDotNetV1.Models.CartAdmin>
+
+@{
+    ViewBag.Title = "Show Customers Carts";
+    List<CartViewModel> cartObjects;
+}
+
+<h1 class="alert alert-info m-5 text-center">Customers Carts</h1>
+
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <table class="table table-bordered table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Order Date</th>
+                <th>Order Content</th>
+                <th>Is Action Taken</th>
+                <th>Is Confirmed</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                cartObjects = Json.Decode<List<CartViewModel>>(@item.CartContent);
+
+                <tr>
+                    <td>@item.CartAdminID</td>
+                    <td>@item.BuyerName</td>
+                    <td>@item.AddTime</td>
+                    <td class="text-left">
+                        @foreach (var product in cartObjects)
+                        {
+                            <p>
+                                <label>Product Name : </label>
+                                @product.name
+                            </p>
+                            <p>
+                                <label>Product Price : </label>
+                                @product.price
+                            </p>
+                            <p>
+                                <label>Product Available Quantity : </label>
+                                @product.AvailableQuantity
+                            </p>
+                            <p>
+                                <label>Number Of Requested : </label>
+                                @product.count
+                            </p>
+
+                            <hr />
+                        }
+                    </td>
+                    <td>@item.IsActionTaken</td>
+                    <td>
+                        @if (!item.IsActionTaken)
+                        {
+                            <select id="orderConfirmList" name="confirmationIDs.@item.CartAdminID">
+                                <option value="true">Yes</option>
+                                <option selected value="false">No</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select id="orderConfirmList">
+                                @if (item.IsConfirmed)
+                                {
+                                    <option selected value="true">Yes</option>
+                                    <option value="false">No</option>
+                                }
+                                else
+                                {
+                                    <option value="true">Yes</option>
+                                    <option selected value="false">No</option>
+                                }
+                            </select>
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6">
+                    <input type="submit" value="Take Action" class="btn btn-primary" />
+                    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+

@@ -1,0 +1,90 @@
+﻿@using MVCDotNetV1.Models
+@model IEnumerable<MVCDotNetV1.Models.CartAdmin>
+
+@{
+    ViewBag.Title = "My Orders";
+    List<CartViewModel> cartObjects;
+    int index = 0;
+}
+
+
+<br />
+<br />
+
+<table class="table table-bordered table-striped table-hover text-center">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Order Content</th>
+            <th>Is Action Taken</th>
+            <th>Is Confirmed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            cartObjects = Json.Decode<List<CartViewModel>>(@item.CartContent);
+            ++index;
+
+            <tr>
+                <td>@index</td>
+                <td>@item.AddTime</td>
+                <td class="text-left">
+                    @foreach (var product in cartObjects)
+                    {
+                        <p>
+                            <label>Product Name : </label>
+                            @product.name
+                        </p>
+                        <p>
+                            <label>Product Price : </label>
+                            @product.price
+                        </p>
+                        <p>
+                            <label>Product Available Quantity : </label>
+                            @product.AvailableQuantity
+                        </p>
+                        <p>
+                            <label>Number Of Requested : </label>
+                            @product.count
+                        </p>
+
+                        <hr />
+                    }
+                </td>
+                <td>
+                    @if (item.IsActionTaken)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </td>
+                <td>
+                    @if (item.IsConfirmed)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5">
+                @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<br />
+<br />
+
+

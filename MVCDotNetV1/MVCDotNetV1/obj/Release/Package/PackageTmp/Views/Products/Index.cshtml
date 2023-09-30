@@ -1,0 +1,128 @@
+@model IEnumerable<MVCDotNetV1.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container  form-horizontal" style="margin:50px">
+    <h2 class="text-center" style="margin:20px"> Prouducts</h2>
+
+    <div>
+        @Html.ActionLink("Create New", "Create", "products", new { @class = "btn btn-primary" })
+    </div>
+    <br />
+  
+
+    @*pagination*@
+
+
+    <table class="table table-dark table-bordered" data-replace="jtable" id="example" aria-label="JS Datatable" data-locale="en" data-search="true">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImagePath)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.AvailableQuantity)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Subcat.subcatName)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subcat.Maincat.maincatName)
+
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        <img src="~/images/@item.ImagePath" width="60" height="60" />
+                    </td>
+                    
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AvailableQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subcat.subcatName)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subcat.Maincat.maincatName)
+
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImagePath)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.MainCategory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubCategory)
+                </th>*@
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </th>
+
+
+                <th>
+                    @Html.DisplayNameFor(model => model.AvailableQuantity)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+    
+</div>

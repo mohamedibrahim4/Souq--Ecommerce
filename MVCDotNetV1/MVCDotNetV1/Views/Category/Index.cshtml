@@ -1,0 +1,150 @@
+
+@model IEnumerable<MVCDotNetV1.Models.Product>
+@{
+    ViewBag.Title = "cat Page";
+}
+<div class="products">
+    <div class="container">
+        <div class="col-md-4 products-left">
+            <div class="categories">
+                <h2>Categories</h2>
+                <ul class="cate">
+                    <li><a href="@Url.Action("Allcatogry", "Category",new { CatName="Food" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Food</a></li>
+
+                    <ul>
+
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Fruits" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Fruits</a></li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Vegetables" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Vegetables</a></li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Drinking" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Drinking</a></li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "snack" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>snack</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Cooking essentials" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Cooking essentials</a> </li>
+
+                    </ul>
+                    <li><a href="@Url.Action("Allcatogry", "Category",new { CatName=" Electronic"})"><i class="fa fa-arrow-right" aria-hidden="true"></i>Electronic</a></li>
+
+                    <ul>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "phone" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>phone</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "Tablet" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Tablet</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "TVs" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>TVs</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "Laptop" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Laptop</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "Camera" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Camera</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName=" Electronic" ,SubCat= "IT Accessories" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>IT Accessories</a> </li>
+
+
+                    </ul>
+                    <li><a href="@Url.Action("Allcatogry", "Category",new { CatName="Home_Kitchen" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Home &amp; Kitchen</a></li>
+                    <ul>
+
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat="Dining" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>kitchen&Dining</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat="Home Decor" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Home Decor</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Bean Bags" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Bean Bags</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Storage" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Storage</a> </li>
+                        <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Cleaning Tools" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Cleaning Tools</a> </li>
+
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8 products-right">
+            @*<div class="products-right-grid">
+                <div class="products-right-grids">
+                    <div class="sorting">
+                        <select id="country" onchange="change_country(this.value)" class="frm-field required sect">
+                            <option value="null">Default sorting</option>
+                            <option value="null">Sort by popularity</option>
+                            <option value="null">Sort by average rating</option>
+                            <option value="null">Sort by price</option>
+                        </select>
+                    </div>
+                    <div class="sorting-left">
+                        <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                            <option value="null">Item on page 9</option>
+                            <option value="null">Item on page 18</option>
+                            <option value="null">Item on page 32</option>
+                            <option value="null">All</option>
+                        </select>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>*@
+
+
+            <div class="agile_top_brands_grids">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 top_brand_left" style="margin-bottom:35px">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+
+                                    <img src="~/Content/assets/images/offer.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="agile_top_brand_right_grid_pos">
+                                    <h4>
+                                        <span>@(item.Discount)%</span>
+
+                                    </h4>
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a href="single.html"><img title=" " alt=" " src="~/images/@item.ImagePath" width="150px" height="150px"></a>
+                                                <p>@item.ProductName</p>
+                                                <h4>@(item.Price - (item.Price * (item.Discount) / 100)) <span>@item.Price</span></h4>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <!--<input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="add" value="1">
+    <input type="hidden" name="business" value=" ">
+    <input type="hidden" name="item_name" value="@item.ProductName">
+    <input type="hidden" name="amount" value="@item.Price">
+    <input type="hidden" name="discount_amount" value="@item.Discount">
+    <input type="hidden" name="currency_code" value="USD">
+    <input type="hidden" name="return" value=" ">
+    <input type="hidden" name="cancel_return" value=" ">-->
+                                                        @*<input type="submit" name="submit" value="Add to cart" class="button">*@
+                                                        @*<input type="submit" data-name="@item.ProductName" data-price="@item.Price" name="submit" class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">*@
+                                                        <input type="submit" data-name="@item.ProductName" data-available-quantity="@item.AvailableQuantity" data-price="@item.Price"
+                                                               name="submit" class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                <div class="clearfix"> </div>
+            </div>
+
+
+            @*<nav class="numbering">
+                <ul class="pagination paging">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>*@
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

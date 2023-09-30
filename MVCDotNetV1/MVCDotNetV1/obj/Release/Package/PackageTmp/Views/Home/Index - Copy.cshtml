@@ -1,0 +1,310 @@
+﻿@model IEnumerable<MVCDotNetV1.Models.offer>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Start Main Slider -->
+<!-- //top-brands -->
+<!-- Carousel
+   ===
+    =============================================== -->
+<div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <a href="beverages.html"> <img class="first-slide" src="~/Content/assets/images/slider1.jpg" alt="First slide"></a>
+
+            </div>
+            <div class="item">
+                <a href="personalcare.html"> <img class="second-slide " src="~/Content/assets/images/slider1.jpg" alt="Second slide"></a>
+
+            </div>
+            <div class="item">
+                <a href="household.html"><img class="third-slide " src="~/Content/assets/images/slider1.jpg" alt="Third slide"></a>
+
+            </div>
+        </div>
+
+    </div><!-- /.carousel -->
+    <!-- End Main Slider -->
+</div>
+
+
+<div class="newproducts-w3agile">
+    <div class="container">
+        <br />
+        <h3>
+            Top This week
+        </h3>
+        <div class="agile_top_brands_grids">
+            @if (Model.ToList().Count == 0)
+            {
+            <center><h1 class="alert alert-danger" >NO ITEM THIS WEEK</h1></center>
+            }
+            else
+            {
+            foreach (var item in Model)
+            {
+
+
+                <div class="col-md-3 top_brand_left-1">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="~/Content/assets/images/offer.png" alt=" " class="img-responsive">
+                            </div>
+                            <div class="agile_top_brand_right_grid_pos">
+                                <h4>
+                                    <span>@(item.Discount)%</span>
+
+                                </h4>
+                            </div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="products.html"><img title=" " alt=" " src="~/images/@item.ImagePath" width="150px" height="150px"></a>
+                                            <p>@item.ProductName</p>
+                                            <div class="stars">
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                            </div>
+                                            <h4>@(item.Price - (item.Price * (item.Discount) / 100)) <span>@item.Price</span></h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="#" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart">
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="business" value=" ">
+                                                    <input type="hidden" name="item_name" value="@item.ProductName">
+                                                    <input type="hidden" name="amount" value="@item.Price">
+                                                    <input type="hidden" name="discount_amount" value="@item.Discount">
+                                                    <input type="hidden" name="currency_code" value="USD">
+                                                    <input type="hidden" name="return" value=" ">
+                                                    <input type="hidden" name="cancel_return" value=" ">
+                                                    @*<input type="submit" name="submit" value="Add to cart" class="button">*@
+
+                                                    <input type="submit" data-name="@item.ProductName" data-price="@item.Price" name="submit"
+                                                           class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">
+
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div class="newproducts-w3agile">
+    <div class="container">
+        <br />
+        <h3>Top Offer</h3>
+        <div class="agile_top_brands_grids">
+            @foreach (var item in ViewBag.discount)
+            {
+                <div class="col-md-3 top_brand_left-1">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="~/Content/assets/images/offer.png" alt=" " class="img-responsive">
+                            </div>
+                            <div class="agile_top_brand_right_grid_pos">
+                                <h4>
+                                    <span>@(item.Discount)%</span>
+
+                                </h4>
+                            </div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="products.html"><img title=" " alt=" " src="~/images/@item.ImagePath" width="150px" height="150px"></a>
+                                            <p>@item.ProductName</p>
+                                            <div class="stars">
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                            </div>
+                                            <h4>@(item.Price-(item.Price*(item.Discount)/100)) <span>@item.Price</span></h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="#" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart">
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="business" value=" ">
+                                                    <input type="hidden" name="item_name" value="@item.ProductName">
+                                                    <input type="hidden" name="amount" value="@item.Price">
+                                                    <input type="hidden" name="discount_amount" value="@item.Discount">
+                                                    <input type="hidden" name="currency_code" value="USD">
+                                                    <input type="hidden" name="return" value=" ">
+                                                    <input type="hidden" name="cancel_return" value=" ">
+                                                    @*<input type="submit" name="submit" value="Add to cart" class="button">*@
+                                                    <input type="submit" data-name="@item.ProductName" data-price="@item.Price" name="submit" class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div class="newproducts-w3agile">
+    <div class="container">
+        <br />
+        <h3>Last of all</h3>
+        <div class="agile_top_brands_grids">
+            @foreach (var item in ViewBag.min)
+            {
+                <div class="col-md-3 top_brand_left-1">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="~/Content/assets/images/offer.png" alt=" " class="img-responsive">
+                            </div>
+                            <div class="agile_top_brand_right_grid_pos">
+                                <h4>
+                                    <span>@(item.Discount)%</span>
+
+                                </h4>
+                            </div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="products.html"><img title=" " alt=" " src="~/images/@item.ImagePath" width="150px" height="150px"></a>
+                                            <p>@item.ProductName</p>
+                                            <div class="stars">
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                            </div>
+                                            <h4>@(item.Price-(item.Price*(item.Discount)/100)) <span>@item.Price</span></h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="#" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart">
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="business" value=" ">
+                                                    <input type="hidden" name="item_name" value="@item.ProductName">
+                                                    <input type="hidden" name="amount" value="@item.Price">
+                                                    <input type="hidden" name="discount_amount" value="@item.Discount">
+                                                    <input type="hidden" name="currency_code" value="USD">
+                                                    <input type="hidden" name="return" value=" ">
+                                                    <input type="hidden" name="cancel_return" value=" ">
+                                                    @*<input type="submit" name="submit" value="Add to cart" class="button">*@
+                                                    <input type="submit" data-name="@item.ProductName" data-price="@item.Price" name="submit" class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+ <div class="newproducts-w3agile">
+        <div class="container">
+            <br />
+            <h3>
+                New Arrival
+            </h3>
+            <div class="agile_top_brands_grids">
+                @foreach (var item in ViewBag.items)
+                {
+                  
+                    <div class="col-md-3 top_brand_left-1">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img src="~/Content/assets/images/offer.png" alt=" " class="img-responsive">
+                                </div>
+                                <div class="agile_top_brand_right_grid_pos">
+                                    <h4>
+                                        <span>@(item.Discount)%</span>
+
+                                    </h4>
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a href="products.html"><img title=" " alt=" " src="~/images/@item.ImagePath" width="150px" height="150px"></a>
+                                                <p>@item.ProductName</p>
+                                                <div class="stars">
+                                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                                </div>
+                                                <h4>@(item.Price - (item.Price * (item.Discount) / 100)) <span>@item.Price</span></h4>
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart">
+                                                        <input type="hidden" name="add" value="1">
+                                                        <input type="hidden" name="business" value=" ">
+                                                        <input type="hidden" name="item_name" value="@item.ProductName">
+                                                        <input type="hidden" name="amount" value="@item.Price">
+                                                        <input type="hidden" name="discount_amount" value="@item.Discount">
+                                                        <input type="hidden" name="currency_code" value="USD">
+                                                        <input type="hidden" name="return" value=" ">
+                                                        <input type="hidden" name="cancel_return" value=" ">
+                                                        @*<input type="submit" name="submit" value="Add to cart" class="button">*@
+                                                        <input type="submit" data-name="@item.ProductName" data-price="@item.Price" name="submit" class="add-to-cart button" value="Add to cart" data-toggle="modal" data-target="#cart" aria-hidden="false">
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                }
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+
+

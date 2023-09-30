@@ -1,0 +1,426 @@
+﻿@using MVCDotNetV1.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Super Market Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Content/assets/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="~/Content/assets/css/font-awesome.css" rel="stylesheet">
+
+
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="~/Content/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Content/assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+
+
+
+
+    @*<link href="~/Content/assets/css/datatable.min.css" rel="stylesheet" />*@
+    <style>
+        .jtable__search {
+            transition: width 0.4s ease-in-out;
+            float: right;
+            clear: both;
+            padding:5px;
+            margin:5px;
+            
+        }
+            .jtable__search:focus {
+                width: 75%;
+                text-align:center;
+            }
+    </style>
+
+
+
+
+
+
+
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Content/assets/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+</head>
+
+<body>
+    <!-- header -->
+    <div class="agileits_header" style="margin-bottom:10px">
+
+        <div class="container">
+            <div class="w3l_offers">
+
+                <div class="w3l_search" style="float:right ;margin-top:10px ;width:300px">
+                    <form action="/home/search" method="post">
+                        <input type="search" id="search" name="Search" placeholder="Search for a Product..." required="">
+                        <button type="submit" class="btn btn-default search" aria-label="Left Align">
+                            <i class="fa fa-search" aria-hidden="true"> </i>
+                        </button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+
+                @*<p>SALE UP TO 70% OFF. USE CODE "SALE70%" . <a href="products.html">SHOP NOW</a></p>*@
+                <p><a href="products.html">@Html.ActionLink("Souq", "index", "home", new { style = "font-size:45px;float:left" })</a></p>
+
+
+            </div>
+            <div class="agile-login">
+                <ul>
+                    @Html.Partial("_LoginPartial")
+
+
+                    @if (User.IsInRole(RoleName.Seller))
+                    {
+                        <li>
+                            @Html.ActionLink("Customers Orders", "GetCart", "AdminCart")
+                        </li>
+                    }
+
+
+                </ul>
+
+            </div>
+            <div class="product_list_header">
+                <form action="" method="post" class="last">
+                    @*<input type="hidden" name="cmd" value="_cart">
+                        <input type="hidden" name="display" value="1">*@
+                    @*<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="false"></i></button>*@
+
+                    @*cart*@
+
+
+                    <button class="w3view-cart" type="button" data-toggle="modal" data-target="#cart" aria-hidden="false" style="margin-top:10px">
+                        <div style="background-color: #fe9126;color: snow;border-radius: 10px;"><span class="total-count"></span></div>
+                        <i class="fa fa-cart-arrow-down" aria-hidden="false"></i>
+                    </button>
+
+                    @*<button  class="text-danger clear-cart "  style="margin-top:20px">
+                            <i class="fa fa-trash-o " aria-hidden="false" style="font-size:1em"></i>
+                        </button>*@
+
+
+                    @*<button type="button" class="fa fa-cart-arrow-down" data-toggle="modal" data-target="#cart" aria-hidden="false"> (<span style="color:black" class="total-count"></span>)</button>*@
+                    @*<button class="fa fa-trash-o  text-danger clear-cart " style="font-size:1em"></button>*@
+
+
+
+                </form>
+            </div>
+        </div>
+        @*<div class="clearfix"> </div>*@
+
+    </div>
+
+
+    <!-- //header -->
+    <!-- navigation -->
+    <div class="navigation-agileits">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav">
+                        @*<li class="active"><a href="home/index" class="act">Home</a></li>*@
+                        <li>@Html.ActionLink("home", "index", "home")</li>
+                        <!-- Mega Menu -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Food<b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <a href="@Url.Action("Allcatogry", "Category",new { CatName="Food" })"> All Foods</a>
+
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Fruits" })">Fruits</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Vegetables" })">Vegetables</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Drinking" })">Drinking</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "snack" })">snack</a></li>
+
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Food" ,SubCat= "Cooking essentials" })">Cooking essentials</a></li>
+
+                            </ul>
+
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Electronic<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <a href="@Url.Action("Allcatogry", "Category",new { CatName="Electronic" })"> All Electronic</a>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "phone" })">phone</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "Tablet" })">Tablet</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "TVs" })">TVs</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "Laptop" })">Laptop</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "Camera" })">Camera</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Electronic" ,SubCat= "IT Accessories" })">IT Accessories</a></li>
+
+
+
+                            </ul>
+
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home&Kitchen<b class="caret"></b></a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <a href="@Url.Action("Allcatogry", "Category",new { CatName="Home_Kitchen" })"> All Home&Kitchen</a>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat="Dining" })">kitchen&Dining</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat="Home Decor" })">Home Decor</a></li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Bean Bags" })">Bean Bags</a></li>
+                                <li>
+                                    <a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Storage" })">
+                                        Sto
+                                        rage
+                                    </a>
+                                </li>
+                                <li><a href="@Url.Action("index", "Category",new { CatName="Home_Kitchen" ,SubCat= "Cleaning Tools" })">Cleaning Tools</a></li>
+
+
+                            </ul>
+
+                        </li>
+
+
+
+                        @*<li><a href="products/index">products</a></li>*@
+                        @if (User.IsInRole(RoleName.Seller))
+                        {
+                            <li>@Html.ActionLink("products", "index", "products")</li>
+                        }
+
+                        @*<li><a href="offers.html">Offers</a></li>*@
+                        <li>@Html.ActionLink("Contact Us", "Contact", "home")</li>
+                        <li>@Html.ActionLink("About", "About", "home")</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- //navigation -->
+    <!-- breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+                <li><a href="index.cshtml"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+                <li class="active">
+                    @ViewBag.Title
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- //breadcrumbs -->
+    <div>
+        @RenderBody()
+
+    </div>
+    @*@Html.Partial("_Category")*@
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                   
+
+                    <div style="text-align:right;">
+
+                        <i class="fa fa-trash-o text-danger clear-cart" aria-hidden="false" style="font-size:2em"></i>
+
+                    </div>
+
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                </div>
+                <div class="modal-body">
+                    <table class="show-cart table">
+                    </table>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Order now</button>*@
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="orderNowBtn" data-dismiss="modal" class="btn btn-primary">Order Now</button>
+                    @Html.ActionLink("My Orders", "GetCustomerOrders", "AdminCart", null, new { @class = "btn btn-primary" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- //footer -->
+
+    <div class="footer">
+        <div class="container">
+            <div class="w3_footer_grids">
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Contact</h3>
+
+                    <ul class="address">
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>ELroda talkha, 4th block, <span>Dakhali.</span></li>
+                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mohamedatlm297@gmail.com">info@example.com</a></li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+20169384882</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Information</h3>
+                    <ul class="info">
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i> @Html.ActionLink("Contact Us", "Contact", "home")</li>
+                        <li><i class="fa fa-arrow-right" aria-hidden="true"></i>@Html.ActionLink("About", "About", "home")</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Category</h3>
+                    <ul class="info">
+                        <li><a href="@Url.Action("Allcatogry", "Category",new { CatName="Food" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Food</a></li>
+
+                        <li><a href="@Url.Action("Allcatogry", "Category",new { CatName=" Electronic" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Electronic</a></li>
+
+                        <li><a href="@Url.Action("Allcatogry", "Category",new { CatName="Home_Kitchen" })"><i class="fa fa-arrow-right" aria-hidden="true"></i>Home &amp; Kitchen</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Profile</h3>
+                    <ul class="info">
+                        @*<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="products.html">Store</a></li>*@
+                        <li><i class="fa fa-arrow-right" type="button" data-toggle="modal" data-target="#cart" aria-hidden="true">My Cart</i></li>
+
+                        @*<li>
+                                <i>
+                                    <button class="fa fa-arrow-right" type="button" data-toggle="modal" data-target="#cart" aria-hidden="true">
+                                        My Cart
+                                    </button>
+                                </i>
+                            </li>*@
+                        @if (!(User.IsInRole("Seller") || User.IsInRole("Manager") || User.IsInRole("User")))
+                        {
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="/account/Login">Login</a></li>
+                            @*<li>@Html.ActionLink("Login", "Login", "Account", htmlAttributes: new { id ="loginLink",@class="fa fa-arrow-right",ariaHidden ="true" })</li>*@
+
+                        }
+                        @if (User.IsInRole("Seller"))
+                        {
+                            <li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="/Account/RegisterAdmin">Create Account</a></li>
+
+                        }
+                    </ul>
+
+
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+
+            <div class="container">
+                @*<p>© 2017 Super Market. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>*@
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-botm">
+        <div class="container">
+            <div class="w3layouts-foot">
+                <ul>
+                    <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="payment-w3ls">
+                <img src="~/Content/assets/images/card.png" alt=" " class="img-responsive">
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <!-- top-header and slider -->
+    <!-- here stars scrolling icon -->
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                /*
+                    var defaults = {
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
+                    };
+                */
+
+                $().UItoTop({ easingType: 'easeOutQuart' });
+            });
+        </script>*@
+    <!-- //here ends scrolling icon -->
+    @*<script src="~/Content/assets/js/scripts.js"></script>*@
+    <script src="~/Content/assets/js/scripts.min.js"></script>
+
+    <script src="~/Content/assets/js/site.js"></script>
+
+    <!-- main slider-banner -->
+    <script src="~/Content/assets/js/skdslider.min.js"></script>
+
+    <link href="~/Content/assets/css/skdslider.css" rel="stylesheet">
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#demo1').skdslider({ 'delay': 5000, 'animationSpeed': 2000, 'showNextPrev': true, 'showPlayButton': true, 'autoSlide': true, 'animationType': 'fading' });
+
+            jQuery('#responsive').change(function () {
+                $('#responsive_wrapper').width(jQuery(this).val());
+            });
+
+            ////
+
+
+
+        });
+    </script>
+
+
+    <!-- //main slider-banner -->
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/assets/js/locales.js"></script>
+    <script src="~/Content/assets/js/datatable.js"></script>
+    <script src="~/Content/assets/js/dropdown.js"></script>
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

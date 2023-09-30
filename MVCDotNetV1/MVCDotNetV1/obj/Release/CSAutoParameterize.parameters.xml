@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=SQL5080.site4now.net;Initial Catalog=db_a7602c_shopping;User Id=db_a7602c_shopping_admin;Password=ahmed2030123456" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\graduationp\\edit\\MVCDotNetV1\\MVCDotNetV1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
